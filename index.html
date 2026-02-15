@@ -34,8 +34,12 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, pointer !important;
     }
 
-    /* CONTAINER */
-    .container { max-width: 1150px; margin: 0 auto; width: 100%; }
+    /* CONTAINER — content width, full-bleed backgrounds */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
     /* NOISE */
     .noise {
@@ -63,33 +67,32 @@
       box-shadow: 0 0 6px var(--accent);
     }
 
-    /* NAV */
+    /* NAV — full width background, content constrained */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 5%;
       background: rgba(8,11,16,0.85);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 1150px; margin: 0 auto;
+      max-width: 1000px; margin: 0 auto; padding: 1.4rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.4rem 0;
     }
     .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.1em; }
     .nav-links { list-style: none; display: flex; gap: 2.5rem; }
     .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* HERO */
+    /* HERO — full width, content constrained */
     .hero {
       min-height: 100vh;
-      padding: 120px 5% 80px;
+      padding: 120px 0 80px;
       position: relative; overflow: hidden;
     }
     .hero-inner {
-      max-width: 1150px; margin: 0 auto;
+      max-width: 1000px; margin: 0 auto; padding: 0 2rem;
       display: flex; align-items: center; justify-content: space-between;
+      min-height: calc(100vh - 200px);
     }
     .hero-grid-lines {
       position: absolute; inset: 0;
@@ -97,7 +100,7 @@
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
     }
-    .hero-content { position: relative; z-index: 2; max-width: 600px; }
+    .hero-content { position: relative; z-index: 2; max-width: 560px; }
     .hero-tag {
       display: inline-block; font-size: 0.75rem; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
@@ -132,8 +135,8 @@
     .arrow { transition: transform 0.2s; }
     .cta-btn:hover .arrow { transform: translateX(4px); }
 
-    /* SECTIONS */
-    section { padding: 100px 5%; }
+    /* SECTIONS — full-bleed background, padded top/bottom */
+    section { padding: 100px 0; }
     .section-label { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent2); margin-bottom: 1rem; text-transform: uppercase; }
     section h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 3rem; line-height: 1.2; }
 
@@ -188,8 +191,8 @@
     .social-links a:hover { color: var(--accent); border-color: var(--accent); }
 
     /* FOOTER */
-    footer { padding: 1.5rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
-    .footer-inner { max-width: 1150px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    footer { border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
+    .footer-inner { max-width: 1000px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
 
     /* ANIMATIONS */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -199,8 +202,8 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .hero-inner { flex-direction: column; text-align: center; gap: 3rem; padding-top: 20px; }
-      .hero { padding-top: 140px; }
+      .hero-inner { flex-direction: column; text-align: center; gap: 3rem; min-height: unset; padding-top: 2rem; }
+      .hero { padding-top: 130px; }
       .hero-content { max-width: 100%; }
       .hero-visual { width: 220px; height: 220px; }
       .ring1 { width: 200px; height: 200px; } .ring2 { width: 140px; height: 140px; } .ring3 { width: 90px; height: 90px; }
