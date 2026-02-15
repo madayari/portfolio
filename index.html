@@ -6,18 +6,225 @@
   <title>Mohamed Amin Dhaher — XR Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg:        #080b10;
+      --bg2:       #0d1117;
+      --border:    rgba(0, 200, 255, 0.12);
+      --accent:    #00c8ff;
+      --accent2:   #7b2fff;
+      --text:      #c9d4e0;
+      --text-dim:  #5a6a7a;
+      --white:     #eef2f7;
+      --font-head: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none !important;
+    }
+    a, button { cursor: none !important; }
+
+    /* NOISE */
+    .noise {
+      position: fixed; inset: 0; z-index: 999;
+      pointer-events: none; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* CURSOR */
+    #cursor {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s, opacity 0.3s;
+      top: 0; left: 0;
+    }
+    #cursor.expand {
+      width: 60px; height: 60px;
+      background: rgba(0,200,255,0.06);
+      border-color: var(--accent2);
+    }
+    #cursor-dot {
+      position: fixed;
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+      top: 0; left: 0;
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 5%;
+      background: rgba(8,11,16,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.1em; }
+    .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: space-between; padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 600px; }
+    .hero-tag {
+      display: inline-block; font-size: 0.75rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      border: 1px solid var(--border); padding: 0.4rem 1rem; margin-bottom: 1.8rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-name { font-family: var(--font-head); font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 800; line-height: 1.05; color: var(--white); margin-bottom: 1.5rem; }
+    .hero-name .line { display: block; animation: fadeUp 0.8s ease both; }
+    .hero-name .line:nth-child(1) { animation-delay: 0.1s; }
+    .hero-name .line:nth-child(2) { animation-delay: 0.2s; }
+    .hero-name .line:nth-child(3) { animation-delay: 0.3s; }
+    .accent { color: var(--accent); }
+    .hero-sub { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 2.5rem; line-height: 1.9; animation: fadeUp 0.8s 0.4s ease both; }
+
+    /* HERO VISUAL */
+    .hero-visual { position: relative; width: 320px; height: 320px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .xr-ring { position: absolute; border-radius: 50%; border: 1px solid var(--accent); opacity: 0.25; animation: spin linear infinite; }
+    .ring1 { width: 280px; height: 280px; animation-duration: 18s; }
+    .ring2 { width: 200px; height: 200px; animation-duration: 12s; animation-direction: reverse; border-color: var(--accent2); }
+    .ring3 { width: 130px; height: 130px; animation-duration: 7s; opacity: 0.4; }
+    .xr-core { font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--accent); text-shadow: 0 0 30px var(--accent), 0 0 60px rgba(0,200,255,0.4); z-index: 2; letter-spacing: 0.15em; }
+
+    /* BUTTON */
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 2rem; background: transparent;
+      border: 1px solid var(--accent); color: var(--accent);
+      font-family: var(--font-mono); font-size: 0.85rem;
+      letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+    .cta-btn:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px rgba(0,200,255,0.3); }
+    .arrow { transition: transform 0.2s; }
+    .cta-btn:hover .arrow { transform: translateX(4px); }
+
+    /* SECTIONS */
+    section { padding: 100px 5%; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent2); margin-bottom: 1rem; text-transform: uppercase; }
+    section h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 3rem; line-height: 1.2; }
+
+    /* ABOUT */
+    .about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { color: var(--text-dim); margin-bottom: 1.2rem; font-size: 0.9rem; }
+    .about-stats { display: flex; flex-direction: column; gap: 2.5rem; padding-top: 1rem; }
+    .stat { border-left: 2px solid var(--accent); padding-left: 1.5rem; }
+    .stat-number { font-family: var(--font-head); font-size: 3.5rem; font-weight: 800; color: var(--white); line-height: 1; }
+    .stat-plus { font-size: 2rem; color: var(--accent); font-weight: 700; }
+    .stat-label { display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.3rem; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .skill-card {
+      background: var(--bg2); border: 1px solid var(--border); padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .skill-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,200,255,0.04), transparent); opacity: 0; transition: opacity 0.3s; }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,200,255,0.1); }
+    .skill-card:hover::before { opacity: 1; }
+    .skill-icon { font-size: 1.8rem; color: var(--accent); margin-bottom: 1rem; display: block; }
+    .skill-card h3 { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+    .skill-card p { font-size: 0.82rem; color: var(--text-dim); }
+
+    /* PROJECTS */
+    .projects { background: var(--bg2); border-top: 1px solid var(--border); }
+    .projects-list { display: flex; flex-direction: column; }
+    .project-card {
+      display: flex; align-items: flex-start; gap: 2.5rem;
+      padding: 2.5rem 0; border-bottom: 1px solid var(--border);
+      transition: background 0.25s, padding 0.25s;
+    }
+    .project-card:hover { background: rgba(0,200,255,0.025); padding-left: 1rem; padding-right: 1rem; }
+    .project-number { font-family: var(--font-head); font-size: 3rem; font-weight: 800; color: var(--border); line-height: 1; min-width: 70px; transition: color 0.25s; }
+    .project-card:hover .project-number { color: rgba(0,200,255,0.3); }
+    .project-info { flex: 1; }
+    .project-info h3 { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+    .project-info p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
+    .project-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .project-tags span { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); padding: 0.2rem 0.7rem; color: var(--text-dim); }
+    .project-link { color: var(--accent); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; white-space: nowrap; align-self: center; transition: letter-spacing 0.2s; }
+    .project-link:hover { letter-spacing: 0.2em; }
+
+    /* CONTACT */
+    .contact { text-align: center; background: var(--bg); border-top: 1px solid var(--border); padding-bottom: 120px; }
+    .contact-sub { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 2.5rem; margin-top: -1.5rem; }
+    .social-links { display: flex; justify-content: center; gap: 2.5rem; margin-top: 2.5rem; }
+    .social-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; border-bottom: 1px solid transparent; }
+    .social-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* FOOTER */
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; text-align: center; padding-top: 140px; gap: 3rem; }
+      .hero-content { max-width: 100%; }
+      .hero-visual { width: 220px; height: 220px; }
+      .ring1 { width: 200px; height: 200px; } .ring2 { width: 140px; height: 140px; } .ring3 { width: 90px; height: 90px; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-stats { flex-direction: row; flex-wrap: wrap; gap: 2rem; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-card { flex-direction: column; gap: 1rem; }
+      .project-number { font-size: 2rem; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .social-links { flex-direction: column; gap: 1.2rem; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Custom cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
-
-  <!-- Noise overlay -->
+  <div id="cursor"></div>
+  <div id="cursor-dot"></div>
   <div class="noise"></div>
 
-  <!-- Navigation -->
   <nav>
     <span class="nav-logo">MAD</span>
     <ul class="nav-links">
@@ -28,7 +235,6 @@
     </ul>
   </nav>
 
-  <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-grid-lines"></div>
     <div class="hero-content">
@@ -38,8 +244,8 @@
         <span class="line accent">Amin</span>
         <span class="line">Dhaher</span>
       </h1>
-      <p class="hero-sub">Building immersive realities<br>at the edge of the physical & digital world.</p>
-      <a href="#projects" class="cta-btn">View My Work <span class="arrow">→</span></a>
+      <p class="hero-sub">Building immersive realities<br>at the edge of the physical &amp; digital world.</p>
+      <a href="#projects" class="cta-btn">View My Work <span class="arrow">&#8594;</span></a>
     </div>
     <div class="hero-visual">
       <div class="xr-ring ring1"></div>
@@ -49,14 +255,13 @@
     </div>
   </section>
 
-  <!-- About -->
   <section class="about" id="about">
-    <div class="section-label">// 01 — About</div>
+    <div class="section-label">// 01 &mdash; About</div>
     <div class="about-grid">
       <div class="about-text">
         <h2>Crafting the <span class="accent">next dimension</span> of experience.</h2>
         <p>I'm Mohamed Amin Dhaher, a passionate and versatile VR/AR Developer with extensive experience building immersive applications in Unity. Strong foundation in C#/C++, real-time graphics, and performance optimization. Proficient in Blender, shader development, and advanced Unity workflows for VR.</p>
-        <p>Based in Kef, Tunisia — currently working as a VR Developer at Zarzis Business Parc, building training simulations, surgical experiences, and CAVE systems that push the limits of spatial computing.</p>
+        <p>Based in Kef, Tunisia &mdash; currently working as a VR Developer at Zarzis Business Parc, building training simulations, surgical experiences, and CAVE systems that push the limits of spatial computing.</p>
       </div>
       <div class="about-stats">
         <div class="stat">
@@ -75,185 +280,144 @@
     </div>
   </section>
 
-  <!-- Skills -->
   <section class="skills" id="skills">
-    <div class="section-label">// 02 — Skills</div>
+    <div class="section-label">// 02 &mdash; Skills</div>
     <h2>What I <span class="accent">build with</span></h2>
     <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-icon">◈</div>
-        <h3>VR Development</h3>
-        <p>Fully immersive virtual reality experiences using Unity and Unreal Engine.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">◉</div>
-        <h3>AR Development</h3>
-        <p>Augmented reality apps with ARKit, ARCore, and WebAR frameworks.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">⬡</div>
-        <h3>3D Design</h3>
-        <p>3D modeling, shaders, and real-time rendering pipelines for XR scenes.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">◌</div>
-        <h3>Spatial UI/UX</h3>
-        <p>Designing intuitive user interfaces for headsets, mixed reality, and spatial computing.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">▣</div>
-        <h3>WebXR</h3>
-        <p>Browser-based XR experiences using Three.js, A-Frame, and the WebXR Device API.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">◎</div>
-        <h3>Unity / C#</h3>
-        <p>Building interactive simulations and XR applications with Unity and C# scripting.</p>
-      </div>
+      <div class="skill-card"><div class="skill-icon">&#9672;</div><h3>VR Development</h3><p>Fully immersive virtual reality experiences using Unity and Unreal Engine.</p></div>
+      <div class="skill-card"><div class="skill-icon">&#9673;</div><h3>AR Development</h3><p>Augmented reality apps with ARKit, ARCore, and WebAR frameworks.</p></div>
+      <div class="skill-card"><div class="skill-icon">&#11041;</div><h3>3D Design</h3><p>3D modeling, shaders, and real-time rendering pipelines for XR scenes.</p></div>
+      <div class="skill-card"><div class="skill-icon">&#9676;</div><h3>Spatial UI/UX</h3><p>Designing intuitive interfaces for headsets, mixed reality, and spatial computing.</p></div>
+      <div class="skill-card"><div class="skill-icon">&#9635;</div><h3>WebXR</h3><p>Browser-based XR experiences using Three.js, A-Frame, and the WebXR Device API.</p></div>
+      <div class="skill-card"><div class="skill-icon">&#9678;</div><h3>Unity / C#</h3><p>Building interactive simulations and XR applications with Unity and C# scripting.</p></div>
     </div>
   </section>
 
-  <!-- Projects -->
   <section class="projects" id="projects">
-    <div class="section-label">// 03 — Projects</div>
+    <div class="section-label">// 03 &mdash; Projects</div>
     <h2>Selected <span class="accent">Work</span></h2>
     <div class="projects-list">
 
       <div class="project-card">
         <div class="project-number">01</div>
         <div class="project-info">
-          <h3>VR Training App — Oil & Gas Drilling</h3>
+          <h3>VR Training App &mdash; Oil &amp; Gas Drilling</h3>
           <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. Enables safe, realistic training simulations for industrial workers in a virtual environment.</p>
-          <div class="project-tags">
-            <span>Unity</span><span>VR</span><span>C#</span><span>Industrial</span>
-          </div>
+          <div class="project-tags"><span>Unity</span><span>VR</span><span>C#</span><span>Industrial</span></div>
         </div>
-        <a href="#" class="project-link">View →</a>
+        <a href="#" class="project-link">View &#8594;</a>
       </div>
 
       <div class="project-card">
         <div class="project-number">02</div>
         <div class="project-info">
-          <h3>Zarzis Smart Center — VR Tour</h3>
-          <p>Built an interactive VR tour application for the Zarzis Smart Center, allowing visitors to explore and experience the facility in an immersive virtual walkthrough with enhanced visual quality using advanced lighting and post-processing effects.</p>
-          <div class="project-tags">
-            <span>Unity</span><span>VR</span><span>Blender</span><span>Lighting</span>
-          </div>
+          <h3>Zarzis Smart Center &mdash; VR Tour</h3>
+          <p>Built an interactive VR tour application for the Zarzis Smart Center, allowing visitors to explore the facility in an immersive virtual walkthrough with enhanced lighting and post-processing effects.</p>
+          <div class="project-tags"><span>Unity</span><span>VR</span><span>Blender</span><span>Lighting</span></div>
         </div>
-        <a href="#" class="project-link">View →</a>
+        <a href="#" class="project-link">View &#8594;</a>
       </div>
 
       <div class="project-card">
         <div class="project-number">03</div>
         <div class="project-info">
-          <h3>Surgical Simulation — CAVE System</h3>
-          <p>Developed a chirurgical simulation running on a CAVE (Cave Automatic Virtual Environment) system — a multi-wall immersive room that projects VR on surrounding walls for a fully spatial surgical training experience.</p>
-          <div class="project-tags">
-            <span>Unity</span><span>CAVE</span><span>VR</span><span>Medical</span>
-          </div>
+          <h3>Surgical Simulation &mdash; CAVE System</h3>
+          <p>Developed a chirurgical simulation running on a CAVE (Cave Automatic Virtual Environment) system &mdash; a multi-wall immersive room projecting VR on surrounding walls for a fully spatial surgical training experience.</p>
+          <div class="project-tags"><span>Unity</span><span>CAVE</span><span>VR</span><span>Medical</span></div>
         </div>
-        <a href="#" class="project-link">View →</a>
+        <a href="#" class="project-link">View &#8594;</a>
       </div>
 
       <div class="project-card">
         <div class="project-number">04</div>
         <div class="project-info">
-          <h3>Geo-Location Mobile App — MapBox SDK</h3>
-          <p>Developed a geo-location-based mobile application at Romeis using MapBox SDK with real-time GPS tracking, enabling spatial awareness and location-based features in a mobile AR/map environment.</p>
-          <div class="project-tags">
-            <span>Unity</span><span>MapBox</span><span>Mobile</span><span>GPS</span>
-          </div>
+          <h3>Geo-Location Mobile App &mdash; MapBox SDK</h3>
+          <p>Developed a geo-location-based mobile application using MapBox SDK with real-time GPS tracking, enabling spatial awareness and location-based features in a mobile environment.</p>
+          <div class="project-tags"><span>Unity</span><span>MapBox</span><span>Mobile</span><span>GPS</span></div>
         </div>
-        <a href="#" class="project-link">View →</a>
+        <a href="#" class="project-link">View &#8594;</a>
       </div>
 
       <div class="project-card">
         <div class="project-number">05</div>
         <div class="project-info">
           <h3>3D Material Strength Simulation</h3>
-          <p>Built a 3D mobile simulation for studying the Strength of Materials, making complex engineering concepts accessible through interactive visualization. Also developed a 2D educational quiz game covering Electrical, Robotics and Strength of Materials topics.</p>
-          <div class="project-tags">
-            <span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span>
-          </div>
+          <p>Built a 3D mobile simulation for studying Strength of Materials, making complex engineering concepts accessible through interactive visualization. Also includes a 2D educational quiz covering Electrical, Robotics and Materials topics.</p>
+          <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
         </div>
-        <a href="#" class="project-link">View →</a>
+        <a href="#" class="project-link">View &#8594;</a>
       </div>
 
       <div class="project-card">
         <div class="project-number">06</div>
         <div class="project-info">
-          <h3>Cross-Platform Game Engine — C</h3>
-          <p>Personal project: built a cross-platform game engine from scratch in C. Implemented Win32 API window creation, real-time input handling (keyboard/Xbox/DualShock 4), DirectSound audio, custom arena-based memory allocators, and a software 2D rendering pipeline with pixel buffer manipulation.</p>
-          <div class="project-tags">
-            <span>C</span><span>Win32</span><span>DirectSound</span><span>Engine</span>
-          </div>
+          <h3>Cross-Platform Game Engine &mdash; C</h3>
+          <p>Personal project: built a game engine from scratch in C with Win32 API window creation, real-time input handling (keyboard/Xbox/DualShock 4), DirectSound audio, custom arena memory allocators, and a software 2D rendering pipeline.</p>
+          <div class="project-tags"><span>C</span><span>Win32</span><span>DirectSound</span><span>Engine</span></div>
         </div>
-        <a href="#" class="project-link">View →</a>
+        <a href="#" class="project-link">View &#8594;</a>
       </div>
 
     </div>
   </section>
 
-  <!-- Contact -->
   <section class="contact" id="contact">
-    <div class="section-label">// 04 — Contact</div>
+    <div class="section-label">// 04 &mdash; Contact</div>
     <h2>Let's build something <span class="accent">real.</span></h2>
     <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
-    <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">→</span></a>
+    <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
     <div class="social-links">
       <a href="https://github.com/madayari" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
       <a href="#" target="_blank">Demo Reel</a>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
-    <span>© 2026 Mohamed Amin Dhaher</span>
+    <span>&copy; 2026 Mohamed Amin Dhaher</span>
     <span>XR Developer</span>
   </footer>
 
   <script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    const dot = document.getElementById('cursorDot');
+    var cursor = document.getElementById('cursor');
+    var dot = document.getElementById('cursor-dot');
 
-    // Hide until mouse moves for the first time
-    cursor.style.opacity = '0';
-    dot.style.opacity = '0';
-
-    document.addEventListener('mousemove', e => {
-      cursor.style.opacity = '1';
-      dot.style.opacity = '1';
+    document.addEventListener('mousemove', function(e) {
       cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      dot.style.left = e.clientX + 'px';
-      dot.style.top = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, .skill-card, .project-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+      cursor.style.top  = e.clientY + 'px';
+      dot.style.left    = e.clientX + 'px';
+      dot.style.top     = e.clientY + 'px';
+      cursor.style.opacity = '1';
+      dot.style.opacity    = '1';
     });
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.skill-card, .project-card, .stat, .about-text, h2');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
+    document.querySelectorAll('a, .skill-card, .project-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { cursor.classList.add('expand'); });
+      el.addEventListener('mouseleave', function() { cursor.classList.remove('expand'); });
+    });
+
+    var revealEls = document.querySelectorAll('.skill-card, .project-card, .stat, .about-text, h2');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    revealEls.forEach(function(el) { el.classList.add('reveal'); observer.observe(el); });
+
+    var counters = document.querySelectorAll('.stat-number');
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
         if (e.isIntersecting) {
-          e.target.classList.add('visible');
+          var target = parseInt(e.target.dataset.target);
+          var count = 0;
+          var step = Math.ceil(target / 30);
+          var timer = setInterval(function() {
+            count += step;
+            if (count >= target) { count = target; clearInterval(timer); }
+            e.target.textContent = count;
+          }, 40);
+          counterObserver.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => { el.classList.add('reveal'); observer.observe(el); });
-
-    // Animated counters
-    const counters = document.querySelectorAll('.stat-number');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const target = parseInt(e.target.dataset.target);
-          let count = 0;
-          const step = Math.ceil(target / 30);
-          const timer = setInterval(() => {
-            count += step;
-         
+    }, { threshold: 0.5 });
+    counters.forEach(function(c) { counterObserver.observe(c); });
+  </script>
+</body>
+</html>
