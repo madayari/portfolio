@@ -28,9 +28,11 @@
       font-size: 15px;
       line-height: 1.7;
       overflow-x: hidden;
-      cursor: none !important;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, auto !important;
     }
-    a, button { cursor: none !important; }
+    a, button, .skill-card, .project-card {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, pointer !important;
+    }
 
     /* NOISE */
     .noise {
@@ -365,7 +367,7 @@
     <div class="section-label">// 04 &mdash; Contact</div>
     <h2>Let's build something <span class="accent">real.</span></h2>
     <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
-    <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
+    <a href="/cdn-cgi/l/email-protection#402428212825326e2d2f28212d2524212d292e00272d21292c6e232f2d" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
     <div class="social-links">
       <a href="https://github.com/madayari" target="_blank">GitHub</a>
       <a href="#" target="_blank">Demo Reel</a>
@@ -377,7 +379,7 @@
     <span>XR Developer</span>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     var cursor = document.getElementById('cursor');
     var dot = document.getElementById('cursor-dot');
 
@@ -413,11 +415,4 @@
             if (count >= target) { count = target; clearInterval(timer); }
             e.target.textContent = count;
           }, 40);
-          counterObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(function(c) { counterObserver.observe(c); });
-  </script>
-</body>
-</html>
+          counterObserver.unobs
