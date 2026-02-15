@@ -166,38 +166,71 @@
 
     /* PROJECTS */
     .projects { background: var(--bg2); border-top: 1px solid var(--border); }
-    .projects-list { display: flex; flex-direction: column; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
     .project-card {
-      display: flex; align-items: center; gap: 2rem;
-      padding: 2rem 0; border-bottom: 1px solid var(--border);
-      transition: background 0.25s, padding 0.25s;
-    }
-    .project-card:hover { background: rgba(0,200,255,0.025); padding-left: 1rem; padding-right: 1rem; }
-    .project-thumb {
-      width: 200px; height: 130px; flex-shrink: 0;
-      border: 1px solid var(--border); overflow: hidden;
-      position: relative; background: var(--bg);
-    }
-    .project-thumb img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.4s ease;
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
       display: block;
     }
-    .project-card:hover .project-thumb img { transform: scale(1.06); }
-    .project-thumb-placeholder {
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,200,255,0.12);
+    }
+    .project-img {
+      width: 100%; aspect-ratio: 16/10;
+      overflow: hidden; position: relative;
+      background: var(--bg);
+    }
+    .project-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .project-card:hover .project-img img { transform: scale(1.06); }
+    .project-img-placeholder {
       width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.1em;
-      text-transform: uppercase; text-align: center;
-      border: 1px dashed rgba(0,200,255,0.2);
+      font-size: 0.65rem; color: var(--text-dim);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      border-bottom: 1px dashed rgba(0,200,255,0.15);
+      min-height: 160px;
     }
-    .project-info { flex: 1; }
-    .project-info h3 { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
-    .project-info p { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1rem; }
-    .project-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .project-tags span { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); padding: 0.2rem 0.7rem; color: var(--text-dim); }
-    .project-link { color: var(--accent); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; white-space: nowrap; align-self: center; transition: letter-spacing 0.2s; }
-    .project-link:hover { letter-spacing: 0.2em; }
+    .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,11,16,0.85) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .project-card:hover .project-overlay { opacity: 1; }
+    .project-body {
+      padding: 1.2rem 1.4rem 1.4rem;
+      border-top: 1px solid var(--border);
+    }
+    .project-body h3 {
+      font-family: var(--font-head); font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+    .project-card:hover .project-body h3 { color: var(--accent); }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .project-tags span {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--border); padding: 0.15rem 0.6rem; color: var(--text-dim);
+    }
+    .project-cta {
+      font-size: 0.75rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .project-card:hover .project-cta { gap: 0.7rem; }
 
     /* CONTACT */
     .contact { text-align: center; background: var(--bg); border-top: 1px solid var(--border); padding-bottom: 120px; }
@@ -226,11 +259,12 @@
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-stats { flex-direction: row; flex-wrap: wrap; gap: 2rem; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
       .project-card { flex-direction: column; gap: 1rem; }
-      .project-thumb { width: 100%; height: 180px; }
     }
     @media (max-width: 560px) {
       .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
       .social-links { flex-direction: column; gap: 1.2rem; }
@@ -323,79 +357,79 @@
     <div class="container">
       <div class="section-label">// 03 &mdash; Projects</div>
       <h2>Selected <span class="accent">Work</span></h2>
-      <div class="projects-list">
+      <div class="projects-grid">
 
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images/project1.jpg" alt="VR Oil & Gas Training" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+        <a href="projects/project1.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project1.jpg" alt="VR Oil & Gas Training" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <div class="project-overlay"></div>
           </div>
-          <div class="project-info">
-            <h3>VR Training App &mdash; Oil &amp; Gas Drilling</h3>
-            <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. Enables safe, realistic training simulations for industrial workers in a virtual environment.</p>
+          <div class="project-body">
+            <h3>VR Training &mdash; Oil &amp; Gas Drilling</h3>
             <div class="project-tags"><span>Unity</span><span>VR</span><span>C#</span><span>Industrial</span></div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-          <a href="#" class="project-link">View &#8594;</a>
-        </div>
+        </a>
 
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images/project2.jpg" alt="Zarzis Smart Center VR Tour" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+        <a href="projects/project2.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project2.jpg" alt="Zarzis Smart Center VR Tour" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <div class="project-overlay"></div>
           </div>
-          <div class="project-info">
+          <div class="project-body">
             <h3>Zarzis Smart Center &mdash; VR Tour</h3>
-            <p>Built an interactive VR tour application for the Zarzis Smart Center, allowing visitors to explore the facility in an immersive virtual walkthrough with enhanced lighting and post-processing effects.</p>
             <div class="project-tags"><span>Unity</span><span>VR</span><span>Blender</span><span>Lighting</span></div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-          <a href="#" class="project-link">View &#8594;</a>
-        </div>
+        </a>
 
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images/project3.jpg" alt="Surgical Simulation CAVE" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+        <a href="projects/project3.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project3.jpg" alt="Surgical Simulation CAVE" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <div class="project-overlay"></div>
           </div>
-          <div class="project-info">
+          <div class="project-body">
             <h3>Surgical Simulation &mdash; CAVE System</h3>
-            <p>Developed a chirurgical simulation running on a CAVE (Cave Automatic Virtual Environment) system &mdash; a multi-wall immersive room projecting VR on surrounding walls for a fully spatial surgical training experience.</p>
             <div class="project-tags"><span>Unity</span><span>CAVE</span><span>VR</span><span>Medical</span></div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-          <a href="#" class="project-link">View &#8594;</a>
-        </div>
+        </a>
 
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images/project4.jpg" alt="Geo-Location MapBox App" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+        <a href="projects/project4.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project4.jpg" alt="Geo-Location MapBox App" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <div class="project-overlay"></div>
           </div>
-          <div class="project-info">
+          <div class="project-body">
             <h3>Geo-Location Mobile App &mdash; MapBox SDK</h3>
-            <p>Developed a geo-location-based mobile application using MapBox SDK with real-time GPS tracking, enabling spatial awareness and location-based features in a mobile environment.</p>
             <div class="project-tags"><span>Unity</span><span>MapBox</span><span>Mobile</span><span>GPS</span></div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-          <a href="#" class="project-link">View &#8594;</a>
-        </div>
+        </a>
 
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images/project5.jpg" alt="3D Material Strength Simulation" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+        <a href="projects/project5.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project5.jpg" alt="3D Material Strength Simulation" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <div class="project-overlay"></div>
           </div>
-          <div class="project-info">
+          <div class="project-body">
             <h3>3D Material Strength Simulation</h3>
-            <p>Built a 3D mobile simulation for studying Strength of Materials, making complex engineering concepts accessible through interactive visualization. Also includes a 2D educational quiz covering Electrical, Robotics and Materials topics.</p>
             <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-          <a href="#" class="project-link">View &#8594;</a>
-        </div>
+        </a>
 
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images/project6.jpg" alt="Cross-Platform Game Engine" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+        <a href="projects/project6.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project6.jpg" alt="Cross-Platform Game Engine" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <div class="project-overlay"></div>
           </div>
-          <div class="project-info">
+          <div class="project-body">
             <h3>Cross-Platform Game Engine &mdash; C</h3>
-            <p>Personal project: built a game engine from scratch in C with Win32 API window creation, real-time input handling (keyboard/Xbox/DualShock 4), DirectSound audio, custom arena memory allocators, and a software 2D rendering pipeline.</p>
             <div class="project-tags"><span>C</span><span>Win32</span><span>DirectSound</span><span>Engine</span></div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-          <a href="#" class="project-link">View &#8594;</a>
-        </div>
+        </a>
 
       </div>
     </div>
