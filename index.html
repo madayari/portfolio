@@ -34,6 +34,9 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, pointer !important;
     }
 
+    /* CONTAINER */
+    .container { max-width: 1150px; margin: 0 auto; width: 100%; }
+
     /* NOISE */
     .noise {
       position: fixed; inset: 0; z-index: 999;
@@ -42,46 +45,36 @@
       background-size: 200px;
     }
 
-    /* CURSOR */
+    /* CURSOR RING */
     #cursor {
-      position: fixed;
-      width: 36px; height: 36px;
-      border: 1.5px solid var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      opacity: 0;
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 99999; opacity: 0;
       transform: translate(-50%, -50%);
       transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s, opacity 0.3s;
       top: 0; left: 0;
     }
-    #cursor.expand {
-      width: 60px; height: 60px;
-      background: rgba(0,200,255,0.06);
-      border-color: var(--accent2);
-    }
+    #cursor.expand { width: 60px; height: 60px; background: rgba(0,200,255,0.06); border-color: var(--accent2); }
     #cursor-dot {
-      position: fixed;
-      width: 5px; height: 5px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      opacity: 0;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.3s;
-      top: 0; left: 0;
+      position: fixed; width: 5px; height: 5px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 99999; opacity: 0;
+      transform: translate(-50%, -50%); top: 0; left: 0;
       box-shadow: 0 0 6px var(--accent);
     }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.4rem 5%;
+      padding: 0 5%;
       background: rgba(8,11,16,0.85);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1150px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 0;
     }
     .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.1em; }
     .nav-links { list-style: none; display: flex; gap: 2.5rem; }
@@ -90,9 +83,13 @@
 
     /* HERO */
     .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      justify-content: space-between; padding: 120px 5% 80px;
+      min-height: 100vh;
+      padding: 120px 5% 80px;
       position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 1150px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
     }
     .hero-grid-lines {
       position: absolute; inset: 0;
@@ -114,8 +111,6 @@
     .hero-name .line:nth-child(3) { animation-delay: 0.3s; }
     .accent { color: var(--accent); }
     .hero-sub { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 2.5rem; line-height: 1.9; animation: fadeUp 0.8s 0.4s ease both; }
-
-    /* HERO VISUAL */
     .hero-visual { position: relative; width: 320px; height: 320px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .xr-ring { position: absolute; border-radius: 50%; border: 1px solid var(--accent); opacity: 0.25; animation: spin linear infinite; }
     .ring1 { width: 280px; height: 280px; animation-duration: 18s; }
@@ -193,7 +188,8 @@
     .social-links a:hover { color: var(--accent); border-color: var(--accent); }
 
     /* FOOTER */
-    footer { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
+    footer { padding: 1.5rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
+    .footer-inner { max-width: 1150px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 
     /* ANIMATIONS */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -203,7 +199,8 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .hero { flex-direction: column; text-align: center; padding-top: 140px; gap: 3rem; }
+      .hero-inner { flex-direction: column; text-align: center; gap: 3rem; padding-top: 20px; }
+      .hero { padding-top: 140px; }
       .hero-content { max-width: 100%; }
       .hero-visual { width: 220px; height: 220px; }
       .ring1 { width: 200px; height: 200px; } .ring2 { width: 140px; height: 140px; } .ring3 { width: 90px; height: 90px; }
@@ -216,7 +213,7 @@
     @media (max-width: 560px) {
       .skills-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
       .social-links { flex-direction: column; gap: 1.2rem; }
     }
   </style>
@@ -228,158 +225,172 @@
   <div class="noise"></div>
 
   <nav>
-    <span class="nav-logo">MAD</span>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-inner">
+      <span class="nav-logo">MAD</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
   </nav>
 
   <section class="hero" id="home">
     <div class="hero-grid-lines"></div>
-    <div class="hero-content">
-      <div class="hero-tag">XR Developer</div>
-      <h1 class="hero-name">
-        <span class="line">Mohamed</span>
-        <span class="line accent">Amin</span>
-        <span class="line">Dhaher</span>
-      </h1>
-      <p class="hero-sub">Building immersive realities<br>at the edge of the physical &amp; digital world.</p>
-      <a href="#projects" class="cta-btn">View My Work <span class="arrow">&#8594;</span></a>
-    </div>
-    <div class="hero-visual">
-      <div class="xr-ring ring1"></div>
-      <div class="xr-ring ring2"></div>
-      <div class="xr-ring ring3"></div>
-      <div class="xr-core">XR</div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">XR Developer</div>
+        <h1 class="hero-name">
+          <span class="line">Mohamed</span>
+          <span class="line accent">Amin</span>
+          <span class="line">Dhaher</span>
+        </h1>
+        <p class="hero-sub">Building immersive realities<br>at the edge of the physical &amp; digital world.</p>
+        <a href="#projects" class="cta-btn">View My Work <span class="arrow">&#8594;</span></a>
+      </div>
+      <div class="hero-visual">
+        <div class="xr-ring ring1"></div>
+        <div class="xr-ring ring2"></div>
+        <div class="xr-ring ring3"></div>
+        <div class="xr-core">XR</div>
+      </div>
     </div>
   </section>
 
   <section class="about" id="about">
-    <div class="section-label">// 01 &mdash; About</div>
-    <div class="about-grid">
-      <div class="about-text">
-        <h2>Crafting the <span class="accent">next dimension</span> of experience.</h2>
-        <p>I'm Mohamed Amin Dhaher, a passionate and versatile VR/AR Developer with extensive experience building immersive applications in Unity. Strong foundation in C#/C++, real-time graphics, and performance optimization. Proficient in Blender, shader development, and advanced Unity workflows for VR.</p>
-        <p>Based in Kef, Tunisia &mdash; currently working as a VR Developer at Zarzis Business Parc, building training simulations, surgical experiences, and CAVE systems that push the limits of spatial computing.</p>
-      </div>
-      <div class="about-stats">
-        <div class="stat">
-          <span class="stat-number" data-target="10">0</span><span class="stat-plus">+</span>
-          <span class="stat-label">XR Projects</span>
+    <div class="container">
+      <div class="section-label">// 01 &mdash; About</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Crafting the <span class="accent">next dimension</span> of experience.</h2>
+          <p>I'm Mohamed Amin Dhaher, a passionate and versatile VR/AR Developer with extensive experience building immersive applications in Unity. Strong foundation in C#/C++, real-time graphics, and performance optimization. Proficient in Blender, shader development, and advanced Unity workflows for VR.</p>
+          <p>Based in Kef, Tunisia &mdash; currently working as a VR Developer at Zarzis Business Parc, building training simulations, surgical experiences, and CAVE systems that push the limits of spatial computing.</p>
         </div>
-        <div class="stat">
-          <span class="stat-number" data-target="4">0</span><span class="stat-plus">+</span>
-          <span class="stat-label">Years Experience</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-target="5">0</span><span class="stat-plus">+</span>
-          <span class="stat-label">Platforms</span>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number" data-target="10">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">XR Projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="4">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="5">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Platforms</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <section class="skills" id="skills">
-    <div class="section-label">// 02 &mdash; Skills</div>
-    <h2>What I <span class="accent">build with</span></h2>
-    <div class="skills-grid">
-      <div class="skill-card"><div class="skill-icon">&#9672;</div><h3>VR Development</h3><p>Fully immersive virtual reality experiences using Unity and Unreal Engine.</p></div>
-      <div class="skill-card"><div class="skill-icon">&#9673;</div><h3>AR Development</h3><p>Augmented reality apps with ARKit, ARCore, and WebAR frameworks.</p></div>
-      <div class="skill-card"><div class="skill-icon">&#11041;</div><h3>3D Design</h3><p>3D modeling, shaders, and real-time rendering pipelines for XR scenes.</p></div>
-      <div class="skill-card"><div class="skill-icon">&#9676;</div><h3>Spatial UI/UX</h3><p>Designing intuitive interfaces for headsets, mixed reality, and spatial computing.</p></div>
-      <div class="skill-card"><div class="skill-icon">&#9635;</div><h3>WebXR</h3><p>Browser-based XR experiences using Three.js, A-Frame, and the WebXR Device API.</p></div>
-      <div class="skill-card"><div class="skill-icon">&#9678;</div><h3>Unity / C#</h3><p>Building interactive simulations and XR applications with Unity and C# scripting.</p></div>
+    <div class="container">
+      <div class="section-label">// 02 &mdash; Skills</div>
+      <h2>What I <span class="accent">build with</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-icon">&#9672;</div><h3>VR Development</h3><p>Fully immersive virtual reality experiences using Unity and Unreal Engine.</p></div>
+        <div class="skill-card"><div class="skill-icon">&#9673;</div><h3>AR Development</h3><p>Augmented reality apps with ARKit, ARCore, and WebAR frameworks.</p></div>
+        <div class="skill-card"><div class="skill-icon">&#11041;</div><h3>3D Design</h3><p>3D modeling, shaders, and real-time rendering pipelines for XR scenes.</p></div>
+        <div class="skill-card"><div class="skill-icon">&#9676;</div><h3>Spatial UI/UX</h3><p>Designing intuitive interfaces for headsets, mixed reality, and spatial computing.</p></div>
+        <div class="skill-card"><div class="skill-icon">&#9635;</div><h3>WebXR</h3><p>Browser-based XR experiences using Three.js, A-Frame, and the WebXR Device API.</p></div>
+        <div class="skill-card"><div class="skill-icon">&#9678;</div><h3>Unity / C#</h3><p>Building interactive simulations and XR applications with Unity and C# scripting.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="projects" id="projects">
-    <div class="section-label">// 03 &mdash; Projects</div>
-    <h2>Selected <span class="accent">Work</span></h2>
-    <div class="projects-list">
+    <div class="container">
+      <div class="section-label">// 03 &mdash; Projects</div>
+      <h2>Selected <span class="accent">Work</span></h2>
+      <div class="projects-list">
 
-      <div class="project-card">
-        <div class="project-number">01</div>
-        <div class="project-info">
-          <h3>VR Training App &mdash; Oil &amp; Gas Drilling</h3>
-          <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. Enables safe, realistic training simulations for industrial workers in a virtual environment.</p>
-          <div class="project-tags"><span>Unity</span><span>VR</span><span>C#</span><span>Industrial</span></div>
+        <div class="project-card">
+          <div class="project-number">01</div>
+          <div class="project-info">
+            <h3>VR Training App &mdash; Oil &amp; Gas Drilling</h3>
+            <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. Enables safe, realistic training simulations for industrial workers in a virtual environment.</p>
+            <div class="project-tags"><span>Unity</span><span>VR</span><span>C#</span><span>Industrial</span></div>
+          </div>
+          <a href="#" class="project-link">View &#8594;</a>
         </div>
-        <a href="#" class="project-link">View &#8594;</a>
-      </div>
 
-      <div class="project-card">
-        <div class="project-number">02</div>
-        <div class="project-info">
-          <h3>Zarzis Smart Center &mdash; VR Tour</h3>
-          <p>Built an interactive VR tour application for the Zarzis Smart Center, allowing visitors to explore the facility in an immersive virtual walkthrough with enhanced lighting and post-processing effects.</p>
-          <div class="project-tags"><span>Unity</span><span>VR</span><span>Blender</span><span>Lighting</span></div>
+        <div class="project-card">
+          <div class="project-number">02</div>
+          <div class="project-info">
+            <h3>Zarzis Smart Center &mdash; VR Tour</h3>
+            <p>Built an interactive VR tour application for the Zarzis Smart Center, allowing visitors to explore the facility in an immersive virtual walkthrough with enhanced lighting and post-processing effects.</p>
+            <div class="project-tags"><span>Unity</span><span>VR</span><span>Blender</span><span>Lighting</span></div>
+          </div>
+          <a href="#" class="project-link">View &#8594;</a>
         </div>
-        <a href="#" class="project-link">View &#8594;</a>
-      </div>
 
-      <div class="project-card">
-        <div class="project-number">03</div>
-        <div class="project-info">
-          <h3>Surgical Simulation &mdash; CAVE System</h3>
-          <p>Developed a chirurgical simulation running on a CAVE (Cave Automatic Virtual Environment) system &mdash; a multi-wall immersive room projecting VR on surrounding walls for a fully spatial surgical training experience.</p>
-          <div class="project-tags"><span>Unity</span><span>CAVE</span><span>VR</span><span>Medical</span></div>
+        <div class="project-card">
+          <div class="project-number">03</div>
+          <div class="project-info">
+            <h3>Surgical Simulation &mdash; CAVE System</h3>
+            <p>Developed a chirurgical simulation running on a CAVE (Cave Automatic Virtual Environment) system &mdash; a multi-wall immersive room projecting VR on surrounding walls for a fully spatial surgical training experience.</p>
+            <div class="project-tags"><span>Unity</span><span>CAVE</span><span>VR</span><span>Medical</span></div>
+          </div>
+          <a href="#" class="project-link">View &#8594;</a>
         </div>
-        <a href="#" class="project-link">View &#8594;</a>
-      </div>
 
-      <div class="project-card">
-        <div class="project-number">04</div>
-        <div class="project-info">
-          <h3>Geo-Location Mobile App &mdash; MapBox SDK</h3>
-          <p>Developed a geo-location-based mobile application using MapBox SDK with real-time GPS tracking, enabling spatial awareness and location-based features in a mobile environment.</p>
-          <div class="project-tags"><span>Unity</span><span>MapBox</span><span>Mobile</span><span>GPS</span></div>
+        <div class="project-card">
+          <div class="project-number">04</div>
+          <div class="project-info">
+            <h3>Geo-Location Mobile App &mdash; MapBox SDK</h3>
+            <p>Developed a geo-location-based mobile application using MapBox SDK with real-time GPS tracking, enabling spatial awareness and location-based features in a mobile environment.</p>
+            <div class="project-tags"><span>Unity</span><span>MapBox</span><span>Mobile</span><span>GPS</span></div>
+          </div>
+          <a href="#" class="project-link">View &#8594;</a>
         </div>
-        <a href="#" class="project-link">View &#8594;</a>
-      </div>
 
-      <div class="project-card">
-        <div class="project-number">05</div>
-        <div class="project-info">
-          <h3>3D Material Strength Simulation</h3>
-          <p>Built a 3D mobile simulation for studying Strength of Materials, making complex engineering concepts accessible through interactive visualization. Also includes a 2D educational quiz covering Electrical, Robotics and Materials topics.</p>
-          <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
+        <div class="project-card">
+          <div class="project-number">05</div>
+          <div class="project-info">
+            <h3>3D Material Strength Simulation</h3>
+            <p>Built a 3D mobile simulation for studying Strength of Materials, making complex engineering concepts accessible through interactive visualization. Also includes a 2D educational quiz covering Electrical, Robotics and Materials topics.</p>
+            <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
+          </div>
+          <a href="#" class="project-link">View &#8594;</a>
         </div>
-        <a href="#" class="project-link">View &#8594;</a>
-      </div>
 
-      <div class="project-card">
-        <div class="project-number">06</div>
-        <div class="project-info">
-          <h3>Cross-Platform Game Engine &mdash; C</h3>
-          <p>Personal project: built a game engine from scratch in C with Win32 API window creation, real-time input handling (keyboard/Xbox/DualShock 4), DirectSound audio, custom arena memory allocators, and a software 2D rendering pipeline.</p>
-          <div class="project-tags"><span>C</span><span>Win32</span><span>DirectSound</span><span>Engine</span></div>
+        <div class="project-card">
+          <div class="project-number">06</div>
+          <div class="project-info">
+            <h3>Cross-Platform Game Engine &mdash; C</h3>
+            <p>Personal project: built a game engine from scratch in C with Win32 API window creation, real-time input handling (keyboard/Xbox/DualShock 4), DirectSound audio, custom arena memory allocators, and a software 2D rendering pipeline.</p>
+            <div class="project-tags"><span>C</span><span>Win32</span><span>DirectSound</span><span>Engine</span></div>
+          </div>
+          <a href="#" class="project-link">View &#8594;</a>
         </div>
-        <a href="#" class="project-link">View &#8594;</a>
-      </div>
 
+      </div>
     </div>
   </section>
 
   <section class="contact" id="contact">
-    <div class="section-label">// 04 &mdash; Contact</div>
-    <h2>Let's build something <span class="accent">real.</span></h2>
-    <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
-    <a href="/cdn-cgi/l/email-protection#402428212825326e2d2f28212d2524212d292e00272d21292c6e232f2d" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
-    <div class="social-links">
-      <a href="https://github.com/madayari" target="_blank">GitHub</a>
-      <a href="#" target="_blank">Demo Reel</a>
+    <div class="container">
+      <div class="section-label">// 04 &mdash; Contact</div>
+      <h2>Let's build something <span class="accent">real.</span></h2>
+      <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
+      <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
+      <div class="social-links">
+        <a href="https://github.com/madayari" target="_blank">GitHub</a>
+        <a href="#" target="_blank">Demo Reel</a>
+      </div>
     </div>
   </section>
 
   <footer>
-    <span>&copy; 2026 Mohamed Amin Dhaher</span>
-    <span>XR Developer</span>
+    <div class="footer-inner">
+      <span>&copy; 2026 Mohamed Amin Dhaher</span>
+      <span>XR Developer</span>
+    </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     var cursor = document.getElementById('cursor');
     var dot = document.getElementById('cursor-dot');
 
@@ -415,4 +426,11 @@
             if (count >= target) { count = target; clearInterval(timer); }
             e.target.textContent = count;
           }, 40);
-          counterObserver.unobs
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(c) { counterObserver.observe(c); });
+  </script>
+</body>
+</html>
