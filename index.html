@@ -34,12 +34,8 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, pointer !important;
     }
 
-    /* CONTAINER — content width, full-bleed backgrounds */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+    /* CONTAINER */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
 
     /* NOISE */
     .noise {
@@ -67,7 +63,7 @@
       box-shadow: 0 0 6px var(--accent);
     }
 
-    /* NAV — full width background, content constrained */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(8,11,16,0.85);
@@ -83,12 +79,8 @@
     .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* HERO — full width, content constrained */
-    .hero {
-      min-height: 100vh;
-      padding: 120px 0 80px;
-      position: relative; overflow: hidden;
-    }
+    /* HERO */
+    .hero { min-height: 100vh; padding: 120px 0 80px; position: relative; overflow: hidden; }
     .hero-inner {
       max-width: 1000px; margin: 0 auto; padding: 0 2rem;
       display: flex; align-items: center; justify-content: space-between;
@@ -135,7 +127,7 @@
     .arrow { transition: transform 0.2s; }
     .cta-btn:hover .arrow { transform: translateX(4px); }
 
-    /* SECTIONS — full-bleed background, padded top/bottom */
+    /* SECTIONS */
     section { padding: 100px 0; }
     .section-label { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent2); margin-bottom: 1rem; text-transform: uppercase; }
     section h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 3rem; line-height: 1.2; }
@@ -166,70 +158,30 @@
 
     /* PROJECTS */
     .projects { background: var(--bg2); border-top: 1px solid var(--border); }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .project-card {
       position: relative; overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--bg);
+      border: 1px solid var(--border); background: var(--bg);
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      text-decoration: none;
       display: block;
     }
-    .project-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 40px rgba(0,200,255,0.12);
-    }
-    .project-img {
-      width: 100%; aspect-ratio: 16/10;
-      overflow: hidden; position: relative;
-      background: var(--bg);
-    }
-    .project-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease;
-    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,200,255,0.12); }
+    .project-img { width: 100%; aspect-ratio: 16/10; overflow: hidden; position: relative; background: var(--bg); }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
     .project-card:hover .project-img img { transform: scale(1.06); }
     .project-img-placeholder {
-      width: 100%; height: 100%;
+      width: 100%; min-height: 160px; height: 100%;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.65rem; color: var(--text-dim);
       letter-spacing: 0.15em; text-transform: uppercase;
       border-bottom: 1px dashed rgba(0,200,255,0.15);
-      min-height: 160px;
     }
-    .project-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,11,16,0.85) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .project-card:hover .project-overlay { opacity: 1; }
-    .project-body {
-      padding: 1.2rem 1.4rem 1.4rem;
-      border-top: 1px solid var(--border);
-    }
-    .project-body h3 {
-      font-family: var(--font-head); font-size: 1rem; font-weight: 700;
-      color: var(--white); margin-bottom: 0.5rem;
-      transition: color 0.2s;
-    }
+    .project-body { padding: 1.2rem 1.4rem 1.4rem; border-top: 1px solid var(--border); }
+    .project-body h3 { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; transition: color 0.2s; }
     .project-card:hover .project-body h3 { color: var(--accent); }
     .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
-    .project-tags span {
-      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-      border: 1px solid var(--border); padding: 0.15rem 0.6rem; color: var(--text-dim);
-    }
-    .project-cta {
-      font-size: 0.75rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent);
-      display: flex; align-items: center; gap: 0.4rem;
-      transition: gap 0.2s;
-    }
+    .project-tags span { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); padding: 0.15rem 0.6rem; color: var(--text-dim); }
+    .project-cta { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
     .project-card:hover .project-cta { gap: 0.7rem; }
 
     /* CONTACT */
@@ -260,7 +212,6 @@
       .about-stats { flex-direction: row; flex-wrap: wrap; gap: 2rem; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
-      .project-card { flex-direction: column; gap: 1rem; }
     }
     @media (max-width: 560px) {
       .skills-grid { grid-template-columns: 1fr; }
@@ -359,77 +310,71 @@
       <h2>Selected <span class="accent">Work</span></h2>
       <div class="projects-grid">
 
-        <a href="projects/project1.html" class="project-card">
+        <div class="project-card">
           <div class="project-img">
             <img src="images/project1.jpg" alt="VR Oil & Gas Training" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
-            <div class="project-overlay"></div>
           </div>
           <div class="project-body">
             <h3>VR Training &mdash; Oil &amp; Gas Drilling</h3>
             <div class="project-tags"><span>Unity</span><span>VR</span><span>C#</span><span>Industrial</span></div>
-            <div class="project-cta">View Project &#8594;</div>
+            <div class="project-cta">Coming Soon</div>
           </div>
-        </a>
+        </div>
 
-        <a href="projects/project2.html" class="project-card">
+        <div class="project-card">
           <div class="project-img">
             <img src="images/project2.jpg" alt="Zarzis Smart Center VR Tour" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
-            <div class="project-overlay"></div>
           </div>
           <div class="project-body">
             <h3>Zarzis Smart Center &mdash; VR Tour</h3>
             <div class="project-tags"><span>Unity</span><span>VR</span><span>Blender</span><span>Lighting</span></div>
-            <div class="project-cta">View Project &#8594;</div>
+            <div class="project-cta">Coming Soon</div>
           </div>
-        </a>
+        </div>
 
-        <a href="projects/project3.html" class="project-card">
+        <div class="project-card">
           <div class="project-img">
             <img src="images/project3.jpg" alt="Surgical Simulation CAVE" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
-            <div class="project-overlay"></div>
           </div>
           <div class="project-body">
             <h3>Surgical Simulation &mdash; CAVE System</h3>
             <div class="project-tags"><span>Unity</span><span>CAVE</span><span>VR</span><span>Medical</span></div>
-            <div class="project-cta">View Project &#8594;</div>
+            <div class="project-cta">Coming Soon</div>
           </div>
-        </a>
+        </div>
 
-        <a href="projects/project4.html" class="project-card">
+        <div class="project-card">
           <div class="project-img">
             <img src="images/project4.jpg" alt="Geo-Location MapBox App" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
-            <div class="project-overlay"></div>
           </div>
           <div class="project-body">
             <h3>Geo-Location Mobile App &mdash; MapBox SDK</h3>
             <div class="project-tags"><span>Unity</span><span>MapBox</span><span>Mobile</span><span>GPS</span></div>
-            <div class="project-cta">View Project &#8594;</div>
+            <div class="project-cta">Coming Soon</div>
           </div>
-        </a>
+        </div>
 
-        <a href="projects/project5.html" class="project-card">
+        <div class="project-card">
           <div class="project-img">
             <img src="images/project5.jpg" alt="3D Material Strength Simulation" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
-            <div class="project-overlay"></div>
           </div>
           <div class="project-body">
             <h3>3D Material Strength Simulation</h3>
             <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
-            <div class="project-cta">View Project &#8594;</div>
+            <div class="project-cta">Coming Soon</div>
           </div>
-        </a>
+        </div>
 
-        <a href="projects/project6.html" class="project-card">
+        <div class="project-card">
           <div class="project-img">
             <img src="images/project6.jpg" alt="Cross-Platform Game Engine" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
-            <div class="project-overlay"></div>
           </div>
           <div class="project-body">
             <h3>Cross-Platform Game Engine &mdash; C</h3>
             <div class="project-tags"><span>C</span><span>Win32</span><span>DirectSound</span><span>Engine</span></div>
-            <div class="project-cta">View Project &#8594;</div>
+            <div class="project-cta">Coming Soon</div>
           </div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -440,7 +385,7 @@
       <div class="section-label">// 04 &mdash; Contact</div>
       <h2>Let's build something <span class="accent">real.</span></h2>
       <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
-      <a href="/cdn-cgi/l/email-protection#a7c3cfc6cfc2d589cac8cfc6cac2c3c6cacec9e7c0cac6cecb89c4c8ca" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
+      <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
       <div class="social-links">
         <a href="https://github.com/madayari" target="_blank">GitHub</a>
         <a href="#" target="_blank">Demo Reel</a>
@@ -455,40 +400,39 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     var cursor = document.getElementById('cursor');
     var dot = document.getElementById('cursor-dot');
-
     document.addEventListener('mousemove', function(e) {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-      dot.style.left    = e.clientX + 'px';
-      dot.style.top     = e.clientY + 'px';
-      cursor.style.opacity = '1';
-      dot.style.opacity    = '1';
+      cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+      dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+      cursor.style.opacity = '1'; dot.style.opacity = '1';
     });
-
     document.querySelectorAll('a, .skill-card, .project-card').forEach(function(el) {
       el.addEventListener('mouseenter', function() { cursor.classList.add('expand'); });
       el.addEventListener('mouseleave', function() { cursor.classList.remove('expand'); });
     });
-
     var revealEls = document.querySelectorAll('.skill-card, .project-card, .stat, .about-text, h2');
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     revealEls.forEach(function(el) { el.classList.add('reveal'); observer.observe(el); });
-
     var counters = document.querySelectorAll('.stat-number');
     var counterObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
           var target = parseInt(e.target.dataset.target);
-          var count = 0;
-          var step = Math.ceil(target / 30);
+          var count = 0; var step = Math.ceil(target / 30);
           var timer = setInterval(function() {
             count += step;
             if (count >= target) { count = target; clearInterval(timer); }
             e.target.textContent = count;
           }, 40);
-          counterObserver.unobs
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(c) { counterObserver.observe(c); });
+  </script>
+</body>
+</html>
