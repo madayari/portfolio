@@ -168,16 +168,32 @@
     .projects { background: var(--bg2); border-top: 1px solid var(--border); }
     .projects-list { display: flex; flex-direction: column; }
     .project-card {
-      display: flex; align-items: flex-start; gap: 2.5rem;
-      padding: 2.5rem 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 2rem;
+      padding: 2rem 0; border-bottom: 1px solid var(--border);
       transition: background 0.25s, padding 0.25s;
     }
     .project-card:hover { background: rgba(0,200,255,0.025); padding-left: 1rem; padding-right: 1rem; }
-    .project-number { font-family: var(--font-head); font-size: 3rem; font-weight: 800; color: var(--border); line-height: 1; min-width: 70px; transition: color 0.25s; }
-    .project-card:hover .project-number { color: rgba(0,200,255,0.3); }
+    .project-thumb {
+      width: 200px; height: 130px; flex-shrink: 0;
+      border: 1px solid var(--border); overflow: hidden;
+      position: relative; background: var(--bg);
+    }
+    .project-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .project-card:hover .project-thumb img { transform: scale(1.06); }
+    .project-thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.1em;
+      text-transform: uppercase; text-align: center;
+      border: 1px dashed rgba(0,200,255,0.2);
+    }
     .project-info { flex: 1; }
-    .project-info h3 { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
-    .project-info p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
+    .project-info h3 { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .project-info p { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1rem; }
     .project-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .project-tags span { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); padding: 0.2rem 0.7rem; color: var(--text-dim); }
     .project-link { color: var(--accent); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; white-space: nowrap; align-self: center; transition: letter-spacing 0.2s; }
@@ -211,7 +227,7 @@
       .about-stats { flex-direction: row; flex-wrap: wrap; gap: 2rem; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .project-card { flex-direction: column; gap: 1rem; }
-      .project-number { font-size: 2rem; }
+      .project-thumb { width: 100%; height: 180px; }
     }
     @media (max-width: 560px) {
       .skills-grid { grid-template-columns: 1fr; }
@@ -310,7 +326,9 @@
       <div class="projects-list">
 
         <div class="project-card">
-          <div class="project-number">01</div>
+          <div class="project-thumb">
+            <img src="images/project1.jpg" alt="VR Oil & Gas Training" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+          </div>
           <div class="project-info">
             <h3>VR Training App &mdash; Oil &amp; Gas Drilling</h3>
             <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. Enables safe, realistic training simulations for industrial workers in a virtual environment.</p>
@@ -320,7 +338,9 @@
         </div>
 
         <div class="project-card">
-          <div class="project-number">02</div>
+          <div class="project-thumb">
+            <img src="images/project2.jpg" alt="Zarzis Smart Center VR Tour" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+          </div>
           <div class="project-info">
             <h3>Zarzis Smart Center &mdash; VR Tour</h3>
             <p>Built an interactive VR tour application for the Zarzis Smart Center, allowing visitors to explore the facility in an immersive virtual walkthrough with enhanced lighting and post-processing effects.</p>
@@ -330,7 +350,9 @@
         </div>
 
         <div class="project-card">
-          <div class="project-number">03</div>
+          <div class="project-thumb">
+            <img src="images/project3.jpg" alt="Surgical Simulation CAVE" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+          </div>
           <div class="project-info">
             <h3>Surgical Simulation &mdash; CAVE System</h3>
             <p>Developed a chirurgical simulation running on a CAVE (Cave Automatic Virtual Environment) system &mdash; a multi-wall immersive room projecting VR on surrounding walls for a fully spatial surgical training experience.</p>
@@ -340,7 +362,9 @@
         </div>
 
         <div class="project-card">
-          <div class="project-number">04</div>
+          <div class="project-thumb">
+            <img src="images/project4.jpg" alt="Geo-Location MapBox App" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+          </div>
           <div class="project-info">
             <h3>Geo-Location Mobile App &mdash; MapBox SDK</h3>
             <p>Developed a geo-location-based mobile application using MapBox SDK with real-time GPS tracking, enabling spatial awareness and location-based features in a mobile environment.</p>
@@ -350,7 +374,9 @@
         </div>
 
         <div class="project-card">
-          <div class="project-number">05</div>
+          <div class="project-thumb">
+            <img src="images/project5.jpg" alt="3D Material Strength Simulation" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+          </div>
           <div class="project-info">
             <h3>3D Material Strength Simulation</h3>
             <p>Built a 3D mobile simulation for studying Strength of Materials, making complex engineering concepts accessible through interactive visualization. Also includes a 2D educational quiz covering Electrical, Robotics and Materials topics.</p>
@@ -360,7 +386,9 @@
         </div>
 
         <div class="project-card">
-          <div class="project-number">06</div>
+          <div class="project-thumb">
+            <img src="images/project6.jpg" alt="Cross-Platform Game Engine" onerror="this.parentElement.innerHTML='<div class=\'project-thumb-placeholder\'>Add<br>Image</div>'">
+          </div>
           <div class="project-info">
             <h3>Cross-Platform Game Engine &mdash; C</h3>
             <p>Personal project: built a game engine from scratch in C with Win32 API window creation, real-time input handling (keyboard/Xbox/DualShock 4), DirectSound audio, custom arena memory allocators, and a software 2D rendering pipeline.</p>
@@ -378,7 +406,7 @@
       <div class="section-label">// 04 &mdash; Contact</div>
       <h2>Let's build something <span class="accent">real.</span></h2>
       <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
-      <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
+      <a href="/cdn-cgi/l/email-protection#a7c3cfc6cfc2d589cac8cfc6cac2c3c6cacec9e7c0cac6cecb89c4c8ca" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
       <div class="social-links">
         <a href="https://github.com/madayari" target="_blank">GitHub</a>
         <a href="#" target="_blank">Demo Reel</a>
@@ -393,7 +421,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     var cursor = document.getElementById('cursor');
     var dot = document.getElementById('cursor-dot');
 
@@ -429,11 +457,4 @@
             if (count >= target) { count = target; clearInterval(timer); }
             e.target.textContent = count;
           }, 40);
-          counterObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(function(c) { counterObserver.observe(c); });
-  </script>
-</body>
-</html>
+          counterObserver.unobs
