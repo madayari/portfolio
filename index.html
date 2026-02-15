@@ -217,7 +217,14 @@
     // Custom cursor
     const cursor = document.getElementById('cursor');
     const dot = document.getElementById('cursorDot');
+
+    // Hide until mouse moves for the first time
+    cursor.style.opacity = '0';
+    dot.style.opacity = '0';
+
     document.addEventListener('mousemove', e => {
+      cursor.style.opacity = '1';
+      dot.style.opacity = '1';
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
       dot.style.left = e.clientX + 'px';
