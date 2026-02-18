@@ -115,7 +115,6 @@
     .arrow { transition: transform 0.2s; }
     .cta-btn:hover .arrow { transform: translateX(4px); }
     section { padding: 100px 0; }
-    .section-label { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent2); margin-bottom: 1rem; text-transform: uppercase; }
     section h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 3rem; line-height: 1.2; }
     .about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -188,8 +187,6 @@
     .social-links { display: flex; justify-content: center; gap: 2.5rem; margin-top: 2.5rem; }
     .social-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; border-bottom: 1px solid transparent; }
     .social-links a:hover { color: var(--accent); border-color: var(--accent); }
-    footer { border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
-    .footer-inner { max-width: 1000px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -209,7 +206,6 @@
       .skills-visual-grid { grid-template-columns: repeat(3, 1fr); }
       .projects-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
       .social-links { flex-direction: column; gap: 1.2rem; }
     }
   </style>
@@ -277,19 +273,6 @@
   </section>
   <section class="skills" id="skills">
     <div class="container">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      <div class="section-label">// 02 &mdash; Skills</div>
-      <h2>What I <span class="accent">build with</span></h2>
-      <div class="skills-grid">
-        <div class="skill-card"><div class="skill-icon">&#9672;</div><h3>VR Development</h3><p>Fully immersive virtual reality experiences using Unity and Unreal Engine.</p></div>
-        <div class="skill-card"><div class="skill-icon">&#9673;</div><h3>AR Development</h3><p>Augmented reality apps with ARKit, ARCore, and WebAR frameworks.</p></div>
-        <div class="skill-card"><div class="skill-icon">&#11041;</div><h3>3D Design</h3><p>3D modeling, shaders, and real-time rendering pipelines for XR scenes.</p></div>
-        <div class="skill-card"><div class="skill-icon">&#9676;</div><h3>Spatial UI/UX</h3><p>Designing intuitive interfaces for headsets, mixed reality, and spatial computing.</p></div>
-        <div class="skill-card"><div class="skill-icon">&#9678;</div><h3>Unity / C#</h3><p>Building interactive simulations and XR applications with Unity and C# scripting.</p></div>
-=======
-=======
->>>>>>> Stashed changes
       <h2><span class="accent">Skills</span></h2>
       <div class="skills-visual-grid">
         <div class="skill-logo-card">
@@ -320,10 +303,6 @@
           <img src="assets/skills/xr-toolkit.png" alt="XR Toolkit">
           <span>XR Toolkit</span>
         </div>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       </div>
     </div>
   </section>
@@ -418,14 +397,14 @@
     <div class="container">
       <h2>Let's build something <span class="accent">real.</span></h2>
       <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
-      <a href="/cdn-cgi/l/email-protection#eb8f838a838e99c58684838a868e8f8a868285ab8c868a8287c5888486" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
+      <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
       <div class="social-links">
         <a href="https://github.com/madayari" target="_blank">GitHub</a>
         <a href="#" target="_blank">Demo Reel</a>
       </div>
     </div>
   </section>
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     var cursor = document.getElementById('cursor');
     var dot = document.getElementById('cursor-dot');
     document.addEventListener('mousemove', function(e) {
@@ -453,4 +432,11 @@
             if (count >= target) { count = target; clearInterval(timer); }
             e.target.textContent = count;
           }, 40);
-          counterObserver.unobs
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(c) { counterObserver.observe(c); });
+  </script>
+</body>
+</html>
