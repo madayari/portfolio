@@ -30,22 +30,16 @@
       overflow-x: hidden;
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, auto !important;
     }
-    a, button, .skill-card, .project-card {
+    a, button, .skill-logo-card, .project-card {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, pointer !important;
     }
-
-    /* CONTAINER */
     .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
-
-    /* NOISE */
     .noise {
       position: fixed; inset: 0; z-index: 999;
       pointer-events: none; opacity: 0.03;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
       background-size: 200px;
     }
-
-    /* CURSOR RING */
     #cursor {
       position: fixed; width: 36px; height: 36px;
       border: 1.5px solid var(--accent); border-radius: 50%;
@@ -62,8 +56,6 @@
       transform: translate(-50%, -50%); top: 0; left: 0;
       box-shadow: 0 0 6px var(--accent);
     }
-
-    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(8,11,16,0.85);
@@ -78,8 +70,6 @@
     .nav-links { list-style: none; display: flex; gap: 2.5rem; }
     .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
-
-    /* HERO */
     .hero { min-height: 100vh; padding: 120px 0 80px; position: relative; overflow: hidden; }
     .hero-inner {
       max-width: 1000px; margin: 0 auto; padding: 0 2rem;
@@ -112,8 +102,6 @@
     .ring2 { width: 200px; height: 200px; animation-duration: 12s; animation-direction: reverse; border-color: var(--accent2); }
     .ring3 { width: 130px; height: 130px; animation-duration: 7s; opacity: 0.4; }
     .xr-core { font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--accent); text-shadow: 0 0 30px var(--accent), 0 0 60px rgba(0,200,255,0.4); z-index: 2; letter-spacing: 0.15em; }
-
-    /* BUTTON */
     .cta-btn {
       display: inline-flex; align-items: center; gap: 0.6rem;
       padding: 0.9rem 2rem; background: transparent;
@@ -126,13 +114,9 @@
     .cta-btn:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px rgba(0,200,255,0.3); }
     .arrow { transition: transform 0.2s; }
     .cta-btn:hover .arrow { transform: translateX(4px); }
-
-    /* SECTIONS */
     section { padding: 100px 0; }
     .section-label { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent2); margin-bottom: 1rem; text-transform: uppercase; }
     section h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 3rem; line-height: 1.2; }
-
-    /* ABOUT */
     .about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
     .about-text p { color: var(--text-dim); margin-bottom: 1.2rem; font-size: 0.9rem; }
@@ -141,22 +125,37 @@
     .stat-number { font-family: var(--font-head); font-size: 3.5rem; font-weight: 800; color: var(--white); line-height: 1; }
     .stat-plus { font-size: 2rem; color: var(--accent); font-weight: 700; }
     .stat-label { display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.3rem; }
-
-    /* SKILLS */
-    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .skill-card {
-      background: var(--bg2); border: 1px solid var(--border); padding: 2rem;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      position: relative; overflow: hidden;
+    .skills { background: var(--bg); }
+    .skills-visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 3rem 2rem;
+      justify-items: center;
+      padding: 2rem 0;
     }
-    .skill-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,200,255,0.04), transparent); opacity: 0; transition: opacity 0.3s; }
-    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,200,255,0.1); }
-    .skill-card:hover::before { opacity: 1; }
-    .skill-icon { font-size: 1.8rem; color: var(--accent); margin-bottom: 1rem; display: block; }
-    .skill-card h3 { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
-    .skill-card p { font-size: 0.82rem; color: var(--text-dim); }
-
-    /* PROJECTS */
+    .skill-logo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s;
+    }
+    .skill-logo-card:hover { transform: translateY(-8px); }
+    .skill-logo-card img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      filter: grayscale(100%) opacity(0.6);
+      transition: filter 0.3s;
+    }
+    .skill-logo-card:hover img { filter: grayscale(0%) opacity(1); }
+    .skill-logo-card span {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-align: center;
+      transition: color 0.3s;
+    }
+    .skill-logo-card:hover span { color: var(--accent); }
     .projects { background: var(--bg2); border-top: 1px solid var(--border); }
     .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .project-card {
@@ -164,6 +163,7 @@
       border: 1px solid var(--border); background: var(--bg);
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       display: block;
+      text-decoration: none;
     }
     .project-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,200,255,0.12); }
     .project-img { width: 100%; aspect-ratio: 16/10; overflow: hidden; position: relative; background: var(--bg); }
@@ -183,25 +183,17 @@
     .project-tags span { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); padding: 0.15rem 0.6rem; color: var(--text-dim); }
     .project-cta { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
     .project-card:hover .project-cta { gap: 0.7rem; }
-
-    /* CONTACT */
     .contact { text-align: center; background: var(--bg); border-top: 1px solid var(--border); padding-bottom: 120px; }
     .contact-sub { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 2.5rem; margin-top: -1.5rem; }
     .social-links { display: flex; justify-content: center; gap: 2.5rem; margin-top: 2.5rem; }
     .social-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; border-bottom: 1px solid transparent; }
     .social-links a:hover { color: var(--accent); border-color: var(--accent); }
-
-    /* FOOTER */
     footer { border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
     .footer-inner { max-width: 1000px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-
-    /* ANIMATIONS */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       .hero-inner { flex-direction: column; text-align: center; gap: 3rem; min-height: unset; padding-top: 2rem; }
       .hero { padding-top: 130px; }
@@ -210,11 +202,11 @@
       .ring1 { width: 200px; height: 200px; } .ring2 { width: 140px; height: 140px; } .ring3 { width: 90px; height: 90px; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-stats { flex-direction: row; flex-wrap: wrap; gap: 2rem; }
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .skills-visual-grid { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 2.5rem 1.5rem; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 560px) {
-      .skills-grid { grid-template-columns: 1fr; }
+      .skills-visual-grid { grid-template-columns: repeat(3, 1fr); }
       .projects-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -223,11 +215,9 @@
   </style>
 </head>
 <body>
-
   <div id="cursor"></div>
   <div id="cursor-dot"></div>
   <div class="noise"></div>
-
   <nav>
     <div class="nav-inner">
       <span class="nav-logo">MAD</span>
@@ -239,7 +229,6 @@
       </ul>
     </div>
   </nav>
-
   <section class="hero" id="home">
     <div class="hero-grid-lines"></div>
     <div class="hero-inner">
@@ -261,10 +250,8 @@
       </div>
     </div>
   </section>
-
   <section class="about" id="about">
     <div class="container">
-      <div class="section-label">// 01 &mdash; About</div>
       <div class="about-grid">
         <div class="about-text">
           <h2>Crafting the <span class="accent">next dimension</span> of experience.</h2>
@@ -288,9 +275,9 @@
       </div>
     </div>
   </section>
-
   <section class="skills" id="skills">
     <div class="container">
+<<<<<<< Updated upstream
       <div class="section-label">// 02 &mdash; Skills</div>
       <h2>What I <span class="accent">build with</span></h2>
       <div class="skills-grid">
@@ -299,107 +286,140 @@
         <div class="skill-card"><div class="skill-icon">&#11041;</div><h3>3D Design</h3><p>3D modeling, shaders, and real-time rendering pipelines for XR scenes.</p></div>
         <div class="skill-card"><div class="skill-icon">&#9676;</div><h3>Spatial UI/UX</h3><p>Designing intuitive interfaces for headsets, mixed reality, and spatial computing.</p></div>
         <div class="skill-card"><div class="skill-icon">&#9678;</div><h3>Unity / C#</h3><p>Building interactive simulations and XR applications with Unity and C# scripting.</p></div>
+=======
+      <h2><span class="accent">Skills</span></h2>
+      <div class="skills-visual-grid">
+        <div class="skill-logo-card">
+          <img src="assets/skills/unity.png" alt="Unity">
+          <span>Unity</span>
+        </div>
+        <div class="skill-logo-card">
+          <img src="assets/skills/arcore.png" alt="ARCore">
+          <span>ARCore</span>
+        </div>
+        <div class="skill-logo-card">
+          <img src="assets/skills/vuforia.png" alt="Vuforia">
+          <span>Vuforia</span>
+        </div>
+        <div class="skill-logo-card">
+          <img src="assets/skills/mapbox.png" alt="MapBox">
+          <span>MapBox</span>
+        </div>
+        <div class="skill-logo-card">
+          <img src="assets/skills/blender.png" alt="Blender">
+          <span>Blender</span>
+        </div>
+        <div class="skill-logo-card">
+          <img src="assets/skills/csharp.png" alt="C#">
+          <span>C#</span>
+        </div>
+        <div class="skill-logo-card">
+          <img src="assets/skills/xr-toolkit.png" alt="XR Toolkit">
+          <span>XR Toolkit</span>
+        </div>
+>>>>>>> Stashed changes
       </div>
     </div>
   </section>
-
   <section class="projects" id="projects">
     <div class="container">
-      <div class="section-label">// 03 &mdash; Projects</div>
       <h2>Selected <span class="accent">Work</span></h2>
       <div class="projects-grid">
-
-        <div class="project-card">
+        <a href="projects/project1.html" class="project-card">
           <div class="project-img">
             <img src="images/project1.png" alt="VR Oil & Gas Training" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
           </div>
           <div class="project-body">
             <h3>VR Training &mdash; Oil &amp; Gas Drilling</h3>
             <div class="project-tags"><span>Unity</span><span>VR</span><span>C#</span><span>Industrial</span></div>
-            <div class="project-cta">Coming Soon</div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-        </div>
-
-        <div class="project-card">
+        </a>
+        <a href="projects/project2.html" class="project-card">
           <div class="project-img">
             <img src="images/project2.png" alt="Zarzis Smart Center VR Tour" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
           </div>
           <div class="project-body">
             <h3>Zarzis Smart Center &mdash; VR Tour</h3>
             <div class="project-tags"><span>Unity</span><span>VR</span><span>Blender</span><span>Lighting</span></div>
-            <div class="project-cta">Coming Soon</div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-        </div>
-
-        <div class="project-card">
+        </a>
+        <a href="projects/project3.html" class="project-card">
           <div class="project-img">
-            <img src="images/project3.png" alt="Surgical Simulation CAVE" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <img src="images/project3.png" alt="Bot-Exam" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
           </div>
           <div class="project-body">
             <h3>Bot-Exam</h3>
             <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
-            <div class="project-cta">Coming Soon</div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-        </div>
-
-        <div class="project-card">
+        </a>
+        <a href="projects/project4.html" class="project-card">
           <div class="project-img">
             <img src="images/project4.png" alt="Geo-Location MapBox App" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
           </div>
           <div class="project-body">
             <h3>Geo-Location Mobile App &mdash; MapBox SDK</h3>
             <div class="project-tags"><span>Unity</span><span>MapBox</span><span>Mobile</span><span>GPS</span></div>
-            <div class="project-cta">Coming Soon</div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-        </div>
-
-        <div class="project-card">
+        </a>
+        <a href="projects/project5.html" class="project-card">
           <div class="project-img">
             <img src="images/project5.png" alt="3D Material Strength Simulation" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
           </div>
           <div class="project-body">
             <h3>3D Material Strength Simulation</h3>
             <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
-            <div class="project-cta">Coming Soon</div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-        </div>
-
-        <div class="project-card">
+        </a>
+        <a href="projects/project6.html" class="project-card">
           <div class="project-img">
-            <img src="images/project6.png" alt="Cross-Platform Game Engine" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+            <img src="images/project6.png" alt="Quiz Game" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
           </div>
           <div class="project-body">
             <h3>Quiz Game &mdash; Educational</h3>
             <div class="project-tags"><span>Unity</span><span>Mobile</span><span>C#</span><span>Education</span></div>
-            <div class="project-cta">Coming Soon</div>
+            <div class="project-cta">View Project &#8594;</div>
           </div>
-        </div>
-
+        </a>
+        <a href="projects/project7.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project7.png" alt="Surgical CAVE Application" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+          </div>
+          <div class="project-body">
+            <h3>Surgical Simulation &mdash; CAVE System</h3>
+            <div class="project-tags"><span>Unity</span><span>CAVE</span><span>VR</span><span>Medical</span></div>
+            <div class="project-cta">View Project &#8594;</div>
+          </div>
+        </a>
+        <a href="projects/project8.html" class="project-card">
+          <div class="project-img">
+            <img src="images/project8.png" alt="Forward Kinematics" onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>Add Image</div>'">
+          </div>
+          <div class="project-body">
+            <h3>Forward Kinematics &mdash; Robotic Arm</h3>
+            <div class="project-tags"><span>Unity</span><span>C#</span><span>Robotics</span><span>Simulation</span></div>
+            <div class="project-cta">View Project &#8594;</div>
+          </div>
+        </a>
       </div>
     </div>
   </section>
-
   <section class="contact" id="contact">
     <div class="container">
-      <div class="section-label">// 04 &mdash; Contact</div>
       <h2>Let's build something <span class="accent">real.</span></h2>
       <p class="contact-sub">Have an XR project in mind? I'd love to hear about it.</p>
-      <a href="mailto:dhaher.mohamedamin@gmail.com" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
+      <a href="/cdn-cgi/l/email-protection#eb8f838a838e99c58684838a868e8f8a868285ab8c868a8287c5888486" class="cta-btn">Get In Touch <span class="arrow">&#8594;</span></a>
       <div class="social-links">
         <a href="https://github.com/madayari" target="_blank">GitHub</a>
         <a href="#" target="_blank">Demo Reel</a>
       </div>
     </div>
   </section>
-
-  <footer>
-    <div class="footer-inner">
-      <span>&copy; 2026 Mohamed Amin Dhaher</span>
-      <span>XR Developer</span>
-    </div>
-  </footer>
-
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     var cursor = document.getElementById('cursor');
     var dot = document.getElementById('cursor-dot');
     document.addEventListener('mousemove', function(e) {
@@ -407,11 +427,11 @@
       dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
       cursor.style.opacity = '1'; dot.style.opacity = '1';
     });
-    document.querySelectorAll('a, .skill-card, .project-card').forEach(function(el) {
+    document.querySelectorAll('a, .skill-logo-card, .project-card').forEach(function(el) {
       el.addEventListener('mouseenter', function() { cursor.classList.add('expand'); });
       el.addEventListener('mouseleave', function() { cursor.classList.remove('expand'); });
     });
-    var revealEls = document.querySelectorAll('.skill-card, .project-card, .stat, .about-text, h2');
+    var revealEls = document.querySelectorAll('.skill-logo-card, .project-card, .stat, .about-text, h2');
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
@@ -427,11 +447,4 @@
             if (count >= target) { count = target; clearInterval(timer); }
             e.target.textContent = count;
           }, 40);
-          counterObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(function(c) { counterObserver.observe(c); });
-  </script>
-</body>
-</html>
+          counterObserver.unobs
