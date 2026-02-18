@@ -74,44 +74,6 @@
       line-height: 1.2;
     }
     .accent { color: var(--accent); }
-    .project-meta {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .meta-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    .meta-value {
-      font-size: 0.9rem;
-      color: var(--white);
-    }
-    .project-tags {
-      display: flex;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .project-tags span {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.8rem;
-      color: var(--text-dim);
-    }
 
     /* HERO IMAGE */
     .hero-image {
@@ -191,7 +153,6 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .project-meta { flex-direction: column; gap: 1rem; }
       .gallery { grid-template-columns: 1fr; }
     }
   </style>
@@ -209,28 +170,6 @@
     
     <div class="project-header">
       <h1>VR Training <span class="accent">—</span> Oil & Gas Drilling</h1>
-      
-      <div class="project-meta">
-        <div class="meta-item">
-          <span class="meta-label">Client</span>
-          <span class="meta-value">Zarzis Business Parc</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Year</span>
-          <span class="meta-value">2024</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Role</span>
-          <span class="meta-value">VR Developer</span>
-        </div>
-      </div>
-
-      <div class="project-tags">
-        <span>Unity</span>
-        <span>VR</span>
-        <span>C#</span>
-        <span>Industrial</span>
-      </div>
     </div>
 
     <div class="hero-image">
@@ -239,7 +178,7 @@
 
     <div class="content-section">
       <h2>Overview</h2>
-      <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. This application enables safe, realistic training simulations for industrial workers in a virtual environment, reducing costs and risks associated with traditional training methods.</p>
+      <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. This application enables safe, realistic training simulations for industrial workers in a virtual environment.</p>
       <p>The simulation recreates complex drilling scenarios, allowing trainees to practice procedures, respond to emergencies, and understand equipment operation without the dangers of a real drilling site.</p>
     </div>
 
@@ -247,11 +186,15 @@
       <h2>Key Features</h2>
       <ul>
         <li>Realistic drilling rig simulation with accurate equipment models</li>
-        <li>Interactive training modules for standard operating procedures</li>
-        <li>Emergency scenario training (blowouts, equipment failures)</li>
-        <li>Hand tracking and controller support for natural interaction</li>
-        <li>Performance metrics and assessment system</li>
-        <li>Multi-user support for collaborative training sessions</li>
+        <li>Graphics and performance optimization, with a focus on light baking and global illumination techniques.</li>
+        <li>Contributed to the modeling of some 3D game assets.</li>
+        <li>Developed UI HandWrist menu.</li>
+        <li>Developed Pulley-Cable system</li>
+        <li>Implemented physics-based interactions using hinge joints/spring joints to simulate mechanical behaviour(chaines, levers).</li>
+        <li>IK system for character rig.</li>
+        <li>Created volumetric light shader.</li>
+        <li>Used Unity Profiler to track memory managment ensuring smooth experience.</li>
+        <li>Created sound effects system for: footsteps/ambiant/engines/drilling/crud oil fall.</li>
       </ul>
     </div>
 
