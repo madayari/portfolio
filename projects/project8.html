@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VR Training — Oil & Gas Drilling | Mohamed Amin Dhaher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #080b10;
+      --bg2:       #0d1117;
+      --border:    rgba(0, 200, 255, 0.12);
+      --accent:    #00c8ff;
+      --accent2:   #7b2fff;
+      --text:      #c9d4e0;
+      --text-dim:  #5a6a7a;
+      --white:     #eef2f7;
+      --font-head: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, auto !important;
+    }
+    a, button {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4' fill='%2300c8ff'/%3E%3C/svg%3E") 6 6, pointer !important;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+    
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,11,16,0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1000px; margin: 0 auto; padding: 1.4rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .back-link {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .back-link:hover { color: var(--accent); }
+    .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.1em; }
+
+    /* PROJECT HEADER */
+    .project-header {
+      padding: 120px 0 60px;
+      text-align: center;
+    }
+    .project-header h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .accent { color: var(--accent); }
+    .project-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .meta-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .meta-value {
+      font-size: 0.9rem;
+      color: var(--white);
+    }
+    .project-tags {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .project-tags span {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* HERO IMAGE */
+    .hero-image {
+      width: 100%;
+      margin: 3rem 0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* CONTENT SECTIONS */
+    .content-section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .content-section h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .content-section p {
+      color: var(--text-dim);
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .content-section ul {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    .content-section ul li {
+      color: var(--text-dim);
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+    .content-section ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    /* IMAGE GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    .gallery-item {
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .gallery-item:hover {
+      border-color: var(--accent);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .project-meta { flex-direction: column; gap: 1rem; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="back-link">← Back to Portfolio</a>
+      <span class="nav-logo">MAD</span>
+    </div>
+  </nav>
+
+  <div class="container">
+    
+    <div class="project-header">
+      <h1>VR Training <span class="accent">—</span> Oil & Gas Drilling</h1>
+      
+      <div class="project-meta">
+        <div class="meta-item">
+          <span class="meta-label">Client</span>
+          <span class="meta-value">Zarzis Business Parc</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Year</span>
+          <span class="meta-value">2024</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">VR Developer</span>
+        </div>
+      </div>
+
+      <div class="project-tags">
+        <span>Unity</span>
+        <span>VR</span>
+        <span>C#</span>
+        <span>Industrial</span>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img src="../images/project1.png" alt="VR Oil & Gas Training">
+    </div>
+
+    <div class="content-section">
+      <h2>Overview</h2>
+      <p>Developed a fully immersive VR training application for Oil and Gas drilling procedures at Zarzis Business Parc. This application enables safe, realistic training simulations for industrial workers in a virtual environment, reducing costs and risks associated with traditional training methods.</p>
+      <p>The simulation recreates complex drilling scenarios, allowing trainees to practice procedures, respond to emergencies, and understand equipment operation without the dangers of a real drilling site.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Realistic drilling rig simulation with accurate equipment models</li>
+        <li>Interactive training modules for standard operating procedures</li>
+        <li>Emergency scenario training (blowouts, equipment failures)</li>
+        <li>Hand tracking and controller support for natural interaction</li>
+        <li>Performance metrics and assessment system</li>
+        <li>Multi-user support for collaborative training sessions</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="../images/project1-1.png" alt="Training Scene 1">
+        </div>
+        <div class="gallery-item">
+          <img src="../images/project1-2.png" alt="Training Scene 2">
+        </div>
+        <div class="gallery-item">
+          <img src="../images/project1-3.png" alt="Training Scene 3">
+        </div>
+        <div class="gallery-item">
+          <img src="../images/project1-4.png" alt="Training Scene 4">
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Technical Details</h2>
+      <p>Built using Unity 2021 LTS with the XR Interaction Toolkit for VR functionality. Custom C# scripts handle the complex drilling mechanics, equipment interactions, and training assessment logic.</p>
+      <p>The application supports multiple VR headsets including Meta Quest 2, HTC Vive, and Valve Index. Optimized for smooth performance with high-fidelity graphics to maintain immersion.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
