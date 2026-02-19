@@ -81,10 +81,13 @@
       margin: 3rem 0;
       border: 1px solid var(--border);
       overflow: hidden;
+      max-height: 500px;
     }
     .hero-image img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      max-height: 500px;
+      object-fit: cover;
       display: block;
     }
 
@@ -173,19 +176,19 @@
     </div>
 
     <div class="hero-image">
-      <img src="../images/project8.png" alt="VR Oil & Gas Training">
+      <img src="../images/project8.png" alt="Forward Kinematics Robotic Arm">
     </div>
 
     <div class="content-section">
       <h2>Overview</h2>
-      <p> Mobile app designed to simulate and understand the forward kinematics of a 6 degree of freedom ronbotic arm by playing with Denavit-Hartenberg parameters.</p>
+      <p>Mobile app designed to simulate and understand the forward kinematics of a 6 degree of freedom robotic arm by playing with Denavit-Hartenberg parameters.</p>
     </div>
 
     <div class="content-section">
       <h2>Key Features</h2>
       <ul>
-        <li>Robot modeing</li>
-        <li>UI design and integration.</li>
+        <li>Robot modeling</li>
+        <li>UI design and integration</li>
       </ul>
     </div>
 
@@ -193,18 +196,18 @@
       <h2>Gallery</h2>
       <div class="gallery">
         <div class="gallery-item">
-          <img src="../images/project8-1.png" alt="Training Scene 1">
+          <img src="../images/project8-1.png" alt="Robotic Arm Scene 1">
         </div>
         <div class="gallery-item">
-          <img src="../images/project8-2.png" alt="Training Scene 2">
+          <img src="../images/project8-2.png" alt="Robotic Arm Scene 2">
         </div>
       </div>
     </div>
 
     <div class="content-section">
       <h2>Technical Details</h2>
-      <p>Built using Unity 2021 LTS with the XR Interaction Toolkit for VR functionality. Custom C# scripts handle the complex drilling mechanics, equipment interactions, and training assessment logic.</p>
-      <p>The application supports multiple VR headsets including Meta Quest 2, HTC Vive, and Valve Index. Optimized for smooth performance with high-fidelity graphics to maintain immersion.</p>
+      <p>Built using Unity with custom C# scripts to implement forward kinematics calculations based on Denavit-Hartenberg parameters. The app provides real-time visualization of joint movements and arm positioning.</p>
+      <p>Designed for mobile platforms with an intuitive interface for adjusting joint angles and viewing the resulting arm configuration in 3D space.</p>
     </div>
 
   </div>
