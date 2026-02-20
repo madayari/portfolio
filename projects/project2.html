@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zarsis Smart Center — VR Tour | Mohamed Amin Dhaher</title>
+  <title>Zarzis Smart Center — VR Tour | Mohamed Amin Dhaher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
@@ -81,10 +81,13 @@
       margin: 3rem 0;
       border: 1px solid var(--border);
       overflow: hidden;
+      max-height: 500px;
     }
     .hero-image img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      max-height: 500px;
+      object-fit: cover;
       display: block;
     }
 
@@ -169,30 +172,47 @@
   <div class="container">
     
     <div class="project-header">
-      <h1>Zarsis Smart Center<span class="accent">—</span>VR Tour</h1>
+      <h1>Zarzis Smart Center <span class="accent">—</span> VR Tour</h1>
     </div>
 
     <div class="hero-image">
-      <img src="../images/project2.png" alt="VR Oil & Gas Training">
+      <img src="../images/project2.png" alt="Zarzis Smart Center VR Tour">
     </div>
 
     <div class="content-section">
       <h2>Overview</h2>
-      <p>Virtual Tour of Zarzis Smart Center</p>
+      <p>Immersive virtual reality tour of the Zarzis Smart Center, showcasing Zarzis Smart Center building. Users can explore multiple floors, interact with building features, and navigate the architectural space in VR.</p>
     </div>
 
     <div class="content-section">
       <h2>Key Features</h2>
       <ul>
-        <li>Development of an elevator system.</li>
-        <li>Interaction with multiple assets.</li>
-        <li>Graphic optimization.</li>
-        <li>GUI Development and Integration.</li>
-        <li>Sprites sheets animation creation.</li>
-        <li>Implementing SFX.</li>
+        <li>Fully functional elevator system with floor selection and smooth transitions</li>
+        <li>Interactive elements throughout the building including doors, information panels, and environmental objects</li>
+        <li>Graphics optimization focusing on light baking and occlusion culling for smooth VR performance</li>
+        <li>Custom UI system with sprite sheet animations for interactive elements</li>
+        <li>Spatial audio implementation with positional sound effects for immersive presence</li>
+        <li>Architectural visualization with accurate interior design and lighting</li>
       </ul>
     </div>
 
+    <div class="content-section">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="../images/project2-1.png" alt="Smart Center Lobby">
+        </div>
+        <div class="gallery-item">
+          <img src="../images/project2-2.png" alt="Smart Center Interior">
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Technical Details</h2>
+      <p>Built using Unity 2021 LTS with Oculus Integration SDK for Meta Quest 2. Custom C# scripts handle elevator mechanics, floor transitions, interactive object states, and teleportation-based navigation system.</p>
+      <p>Extensive use of Unity's lighting tools including baked lighting, light probes, and reflection probes to achieve realistic architectural visualization while maintaining optimal VR performance at 72 FPS.</p>
+    </div>
 
   </div>
 
